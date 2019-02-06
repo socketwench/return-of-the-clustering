@@ -431,6 +431,100 @@
         </section>
 
         <section>
+          <section data-transition="none">
+            <img src="images/hosting1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/hosting2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/hosting3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/hosting4.png" />
+          </section>
+          <section data-background="images/speeder.png" data-background-size="contain">
+            <h1>Getting to Kube-y station</h1>
+          </section>
+          <section>
+            <h2>Self-host</h2>
+            <p class="fragment">Internal on existing hardware...</p>
+            <p class="fragment">...or 3rd-party VPS service</p>
+          </section>
+          <section>
+            <h2>Less lock-in</h2>
+            <p class="fragment">No reliance on special APIs</p>
+            <p class="fragment">Requires staff to manage cluster, set up storage</p>
+          </section>
+          <section>
+            <h2>Privacy</h2>
+            <p class="fragment">Country-local, legal requirements</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/installK8s1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s2.png" data-background-size="contain">
+            <p>Install Docker, kubelet</p>
+            <p class="fragment">Install kubeadm, kubectl on manager</p>
+            <p class="fragment">Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </section>
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s3.png" data-background-size="contain">
+            <p>Install Docker, kubelet</p>
+            <p>Install kubeadm, kubectl on manager</p>
+            <p>Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </section>
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s4.png" data-background-size="contain">
+            <p>Install Docker, kubelet</p>
+            <p>Install kubeadm, kubectl on manager</p>
+            <p>Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
+            <p>Use kubeadm to stand up cluster</p>
+            <p class="fragment"><a href="https://linode.com/docs/applications/containers/how-to-deploy-nginx-on-a-kubernetes-cluster/">Tutorial on Linode docs</a></p>
+          </section>
+          <section>
+            <h2>Storage still tricky</h2>
+            <p class="fragment">Traditionally-managed NFS</p>
+            <p class="fragment"><a href="https://ceph.com/">Ceph</a>, <a href="https://rook.io/">Rook</a>, <a href="https://github.com/heketi/heketi">Heketi</a> have k8s integration</p>
+            <p class="fragment">Alternative: <a href="https://www.drupal.org/project/s3fs">S3 File System</a><span class="fragment">?</span></p>
+          </section>
+          <section data-transition="none">
+            <img src="images/easierWay1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/easierWay2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/easierWay3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/easierWay4.png" />
+          </section>
+          <section>
+            <h2>Managed kubernetes</h2>
+            <p class="fragment">Like a VPS, but for k8s workloads</p>
+            <p class="fragment">Pay only for workers, storage baked-in</p>
+          </section>
+          <section>
+            <h2>Providers</h2>
+            <p class="fragment">Amazon, Google GKE, Azure, Digital Ocean, others</p>
+            <p class="fragment"><a href="https://kubernetes.io/docs/setup/pick-right-solution/">kubernetes.io/docs/setup/pick-right-solution</a></p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/bestChance1.png" data-background-size="contain">
+            <h2>GKE</h2>
+            <p class="fragment">"The standard" in managed k8s</p>
+            <p class="fragment">Integrates with Compute Engine, strong API support</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/bestChance2.png" data-background-size="contain">
+            <h2>GKE</h2>
+            <p class="">"The standard" in managed k8s</p>
+            <p class="">Integrates with Compute Engine, strong API support</p>
+          </section>
+        </section>
+
+        <section>
           <section>
             <h2>Special thanks</h2>
             <p class="fragment">Drupalcamp Florida</p>
