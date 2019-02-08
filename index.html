@@ -525,6 +525,338 @@
         </section>
 
         <section>
+          <section data-transition="none" data-background-transition="none" data-background="images/yamlAllArounYou.png" data-background-size="contain">
+            <h1>The YAML is all around you</h1>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy4.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy5.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="none" data-background="images/kindaWordy6.png" data-background-size="contain">
+            <h2>Helpful Tutorials</h2>
+            <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
+            <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">kubernetes.io/docs/tutorials/kubernetes-basics</a></p>
+          </section>
+          <section>
+            <h2>Architecture</h2>
+            <p class="fragment">Use <a href="https://github.com/ten7/flight-deck">TEN7's Flight Deck</a> for containers</p>
+            <p class="fragment">Create 3-worker cluster of <code>g1-small</code> nodes</p>
+          </section>
+          <section>
+            <h2>Storage</h2>
+            <p class="fragment">Host Drupal code, file uploads, MySQL</p>
+            <p class="fragment">Needs multi-writer, multi-reader support</p>
+          </section>
+          <section>
+            <h2>Access modes</h2>
+            <p class="fragment">Specified on the Persistent Volume Claim (PVC)</p>
+            <p class="fragment"><code>ReadWriteOnce</code> = only one node may read & write</p>
+            <p class="fragment"><code>ReadWriteMany</code> = many readers and writers</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture5.png" />
+          </section>
+          <!-- <section data-transition="none">
+            <img src="images/architecture5.5.png" />
+          </section> -->
+          <section data-transition="none">
+            <img src="images/architecture6.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture7.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture8.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture9.png" />
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80</code></pre>
+            <small class="fragment">(Scroll down.)</small>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  ports:
+    -
+      name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: web
+  type: LoadBalancer</code></pre>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture9.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture10.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture11.png" />
+          </section>
+          <section>
+            <h2>GKE provisioned disks</h2>
+            <p class="fragment">Single writer only!</p>
+            <p class="fragment">Can't use for multiple Apache pods</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture12.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture13.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture14.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture15.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture16.png" />
+          </section>
+          <section>
+            <h2>persistentvolume</h2>
+            <p class="fragment">Makes existing disk known to k8s</p>
+            <p class="fragment">Can have PVCs claim <em>against</em> it</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    # $(service name).$(namespace).svc.cluster.local
+    server: nfs-server.default.svc.cluster.local
+    path: "/"</code></pre>
+          </section>
+          <section>
+            <pre><code>---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 30Gi</code></pre>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: vol-drupal
+              subPath: html
+      volumes:
+        - name: vol-drupal
+          persistentVolumeClaim:
+            claimName: nfs</code></pre>
+            <small class="fragment">(Scroll down.)</small>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture17.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture18.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture19.png" />
+          </section>
+          <section>
+            <h2>StatefulSets</h2>
+            <p class="fragment">A special kind of Deployment</p>
+            <p class="fragment">Hostname assigned deterministically</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: memcache
+spec:
+  selector:
+    matchLabels:
+      app: memcache
+  serviceName: memcache
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: memcache
+    spec:
+      nodeSelector:
+        tier: workload
+      containers:
+        - image: "memcached:1.5-alpine"
+          imagePullPolicy: Always
+          name: "memcache"
+          ports:
+            - containerPort: 11211
+              name: memcache
+              protocol: TCP</code></pre>
+              <small class="fragment">(Scroll down.)</small>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcache
+spec:
+  # Turn off load balancing!
+  clusterIP: None
+  ports:
+    - name: memcache
+      port: 11211
+      protocol: TCP
+  selector:
+    app: memcache</code></pre>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture20.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture21.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture22.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture23.png" />
+          </section>
+          <section>
+            <h2>ingress</h2>
+            <p class="fragment">A special kind of Service</p>
+            <p class="fragment">Maps domains names to k8s Services</p>
+            <p class="fragment">Can terminate SSL</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "my-cluster-ingress"
+  annotations:
+    ingress.kubernetes.io/app-root: /
+    ingress.kubernetes.io/affinity: cookie
+    ingress.kubernetes.io/enable-cors: "true"
+spec:
+  tls:
+    - hosts:
+        - "example.com"
+      secretName: ingress
+  backend:
+    serviceName: varnish
+    servicePort: 6081
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: varnish
+              servicePort: 6081</code></pre>
+            <small class="fragment">(Scroll down.)</small>
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture23.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture24.png" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>The buildchain of yavin</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>You're all clear, k8s!</h1>
+            <!--
+            Now let's deploy this thing and go home!
+            -->
+          </section>
+        </section>
+
+        <section>
           <section>
             <h2>Special thanks</h2>
             <p class="fragment">Drupalcamp Florida</p>
