@@ -801,7 +801,7 @@ spec:
           </section>
           <section>
             <h2>ingress</h2>
-            <p class="fragment">A special kind of Service</p>
+            <p class="fragment">k8s-provided edge load balancer</p>
             <p class="fragment">Maps domains names to k8s Services</p>
             <p class="fragment">Can terminate SSL</p>
           </section>
@@ -842,8 +842,158 @@ spec:
         </section>
 
         <section>
-          <section>
+          <section data-transition="none">
+            <img src="images/gettingIntoGke1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingIntoGke2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingIntoGke3.png" />
+          </section>
+          <section data-background-transition="none" data-background="images/yavin.png" data-background-size="contain">
             <h1>The buildchain of yavin</h1>
+          </section>
+          <section>
+            <h2>Deploying YAML</h2>
+            <p class="fragment"><code>kubectl apply -f path/to/my_object.yml</code></p>
+            <p class="fragment">Repeat for each YAML file to deploy</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/removeHumans1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/removeHumans2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/removeHumans3.png" />
+          </section>
+          <section>
+            <h2>Repeatable Clusters</h2>
+            <p class="fragment">Clients only differ in sizes, logins, some features</p>
+            <p class="fragment">Use Ansible vars & templates to generate YAML</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain6.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain7.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/buildchain8.png" />
+          </section>
+          <section>
+            <h2>Authentication</h2>
+            <p class="fragment"><code>gcloud auth login</code></p>
+            <p class="fragment">Login persistent across shell sessions</p>
+          </section>
+          <section>
+            <h2>Service account</h2>
+            <p class="fragment">Proxy user for scripts, automation</p>
+            <p class="fragment">Does <strong>not</strong> use your Google password</p>
+            <p class="fragment"><a href="https://cloud.google.com/compute/docs/access/service-accounts">cloud.google.com/compute/docs/access/service-accounts</a></p>
+          </section>
+          <section>
+            <pre><code>---
+- hosts: kubectl
+  tasks:
+    - name: Deploy the gcloud key
+      template:
+        src: "templates/gcloud/service-account-key.json.j2"
+        dest: "{{ _gcloud_auth_key_path }}"
+    - name: Authorize the service account
+      shell: >
+        gcloud auth activate-service-account
+        {{ _gcloud_service_account }}
+        --key-file={{ gcloud_auth_key_path }}</code></pre>
+          </section>
+          <section>
+            <h2>Creating the disk</h2>
+            <p class="fragment">Ansible <code>gce_pd</code> module</p>
+            <p class="fragment">Only creates once for the given name, project, zone</p>
+          </section>
+          <section>
+            <pre><code>    - name: Provision the NFS persistent disk
+      gce_pd:
+        name: "{{ nfs_volume_name }}"
+        size_gb: "{{ nfs_volume_size }}"
+        project_id: "{{ gcloud_project_id }}"
+        zone: "{{ gcloud_project_zone }}"
+        credentials_file: "{{ _gcloud_auth_key_path }}"
+        service_account_email: "{{ gcloud_service_account }}"
+        disk_type: "pd-ssd"
+        state: present</code></pre>
+          </section>
+          <section>
+            <h2>Creating the cluster</h2>
+            <p class="fragment">Ansible <code>gcp_container_cluster</code> module</p>
+            <p class="fragment">Allocates worker nodes all in one command!</p>
+          </section>
+          <section>
+            <pre><code>    - name: create a cluster
+      gcp_container_cluster:
+        name: "{{ gke_cluster_name }}"
+        initial_node_count: "{{ gke_cluster_size_min | default(3) }}"
+        node_config:
+          machine_type: "g1-small"
+          disk_size_gb: 100
+        zone: "{{ gcloud_project_zone }}"
+        project: "{{ gcloud_project_id }}"
+        auth_kind: serviceaccount
+        service_account_file: "{{ _gcloud_auth_key_path }}"
+        scopes:
+          - "https://www.googleapis.com/auth/cloud-platform"
+        state: present</code></pre>
+          </section>
+          <section>
+            <h2>Authorizing kubectl</h2>
+            <p class="fragment">Use gcloud API to get k8s auth token</p>
+            <p class="fragment">Necessary for deploying containers</p>
+          </section>
+          <section>
+            <pre><code>    - name: Set the current cluster
+      shell: >
+        gcloud --quiet config set container/cluster
+        {{ gke_cluster_name }}
+    - name: Get the cluster credentials
+      shell: >
+        gcloud container clusters get-credentials
+        {{ gke_cluster_name }}</code></pre>
+          </section>
+          <section>
+            <h2>Writing the k8s yaml</h2>
+            <p class="fragment">Combine per-object YAML using <code>Assemble</code></p>
+            <p class="fragment">Use <code>Template</code> to write variables</p>
+          </section>
+          <section>
+            <h2>Deploying containers</h2>
+            <p class="fragment">Ansible <code>k8s</code> module</p>
+            <p class="fragment">Loop over all templated files, applying config</p>
+          </section>
+          <section>
+            <pre><code>    - name: Apply the definitions
+      k8s:
+        state: present
+        namespace: "{{ item.namespace | default('default') }}"
+        src: "{{ item.filename }}"
+      loop: "{{ k8s_yaml_files }}"
+      environment:
+        GOOGLE_APPLICATION_CREDENTIALS: "{{ _gcloud_auth_key_path }}"</code></pre>
           </section>
         </section>
 
