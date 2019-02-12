@@ -488,7 +488,7 @@
             <h2>Storage still tricky</h2>
             <p class="fragment">Traditionally-managed NFS</p>
             <p class="fragment"><a href="https://ceph.com/">Ceph</a>, <a href="https://rook.io/">Rook</a>, <a href="https://github.com/heketi/heketi">Heketi</a> have k8s integration</p>
-            <p class="fragment">Alternative: <a href="https://www.drupal.org/project/s3fs">S3 File System</a><span class="fragment">?</span></p>
+            <p class="fragment">Alternative: <a href="https://www.drupal.org/project/s3fs">S3 File System</a>, <a href="https://www.drupal.org/project/flysystem_s3">FlySystem s3</a><span class="fragment">?</span></p>
           </section>
           <section data-transition="none">
             <img src="images/easierWay1.png" />
@@ -643,8 +643,8 @@ spec:
             <img src="images/architecture11.png" />
           </section>
           <section>
-            <h2>GKE provisioned disks</h2>
-            <p class="fragment">Single writer only!</p>
+            <h2>Provisioning pvcs</h2>
+            <p class="fragment">GKE, Digital Ocean: Single writer only!</p>
             <p class="fragment">Can't use for multiple Apache pods</p>
           </section>
           <section data-transition="none">
@@ -986,6 +986,11 @@ spec:
             <p class="fragment">Loop over all templated files, applying config</p>
           </section>
           <section>
+            <h2>Namespaces</h2>
+            <p class="fragment">One site = one namespace</p>
+            <p class="fragment">Enforce consistent object names per site</p>
+          </section>
+          <section>
             <pre><code>    - name: Apply the definitions
       k8s:
         state: present
@@ -998,11 +1003,65 @@ spec:
         </section>
 
         <section>
-          <section>
+          <section data-transition="none">
+            <img src="images/deployingSites1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployingSites2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployingSites3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployingSites4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployingSites5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployingSites6.png" />
+          </section>
+          <section data-transition="" data-background-transition="none" data-background="images/deployThisThing1.png" data-background-size="contain">
             <h1>You're all clear, k8s!</h1>
-            <!--
-            Now let's deploy this thing and go home!
-            -->
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/deployThisThing2.png" data-background-size="contain">
+            <h1>You're all clear, k8s!</h1>
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated4.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated5.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section  data-transition="none" data-background-transition="none" data-background="images/kindaCheated6.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/deployProcess6.png" />
           </section>
         </section>
 
