@@ -579,9 +579,6 @@
           <section data-transition="none">
             <img src="images/architecture5.png" />
           </section>
-          <!-- <section data-transition="none">
-            <img src="images/architecture5.5.png" />
-          </section> -->
           <section data-transition="none">
             <img src="images/architecture6.png" />
           </section>
@@ -656,86 +653,24 @@ spec:
           <section data-transition="none">
             <img src="images/architecture14.png" />
           </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/fastestDisk1.png" data-background-size="contain">
+            <h2>Static files</h2>
+            <p class="fragment">...do <strong>not</strong> need block storage!</p>
+            <p class="fragment">Object stores multi-writer by default</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/fastestDisk2.png" data-background-size="contain">
+            <h2>Static files</h2>
+            <p class="">...do <strong>not</strong> need block storage!</p>
+            <p class="">Object stores multi-writer by default</p>
+          </section>
           <section data-transition="none">
             <img src="images/architecture15.png" />
           </section>
           <section data-transition="none">
             <img src="images/architecture16.png" />
           </section>
-          <section>
-            <h2>persistentvolume</h2>
-            <p class="fragment">Makes existing disk known to k8s</p>
-            <p class="fragment">Can have PVCs claim <em>against</em> it</p>
-          </section>
-          <section>
-            <pre><code>---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs
-spec:
-  capacity:
-    storage: 30Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    # $(service name).$(namespace).svc.cluster.local
-    server: nfs-server.default.svc.cluster.local
-    path: "/"</code></pre>
-          </section>
-          <section>
-            <pre><code>---
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: nfs
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: ""
-  resources:
-    requests:
-      storage: 30Gi</code></pre>
-          </section>
-          <section>
-            <pre><code>---
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  labels:
-    app: web
-  name: web
-spec:
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-        - image: ten7/flight-deck-web
-          imagePullPolicy: Always
-          name: web
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - mountPath: /var/www/html
-              name: vol-drupal
-              subPath: html
-      volumes:
-        - name: vol-drupal
-          persistentVolumeClaim:
-            claimName: nfs</code></pre>
-            <small class="fragment">(Scroll down.)</small>
-          </section>
           <section data-transition="none">
             <img src="images/architecture17.png" />
-          </section>
-          <section data-transition="none">
-            <img src="images/architecture18.png" />
-          </section>
-          <section data-transition="none">
-            <img src="images/architecture19.png" />
           </section>
           <section>
             <h2>StatefulSets</h2>
@@ -788,16 +723,16 @@ spec:
     app: memcache</code></pre>
           </section>
           <section data-transition="none">
+            <img src="images/architecture18.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/architecture19.png" />
+          </section>
+          <section data-transition="none">
             <img src="images/architecture20.png" />
           </section>
           <section data-transition="none">
             <img src="images/architecture21.png" />
-          </section>
-          <section data-transition="none">
-            <img src="images/architecture22.png" />
-          </section>
-          <section data-transition="none">
-            <img src="images/architecture23.png" />
           </section>
           <section>
             <h2>ingress</h2>
@@ -834,10 +769,10 @@ spec:
             <small class="fragment">(Scroll down.)</small>
           </section>
           <section data-transition="none">
-            <img src="images/architecture23.png" />
+            <img src="images/architecture21.png" />
           </section>
           <section data-transition="none">
-            <img src="images/architecture24.png" />
+            <img src="images/architecture22.png" />
           </section>
         </section>
 
@@ -921,23 +856,6 @@ spec:
         gcloud auth activate-service-account
         {{ _gcloud_service_account }}
         --key-file={{ gcloud_auth_key_path }}</code></pre>
-          </section>
-          <section>
-            <h2>Creating the disk</h2>
-            <p class="fragment">Ansible <code>gce_pd</code> module</p>
-            <p class="fragment">Only creates once for the given name, project, zone</p>
-          </section>
-          <section>
-            <pre><code>    - name: Provision the NFS persistent disk
-      gce_pd:
-        name: "{{ nfs_volume_name }}"
-        size_gb: "{{ nfs_volume_size }}"
-        project_id: "{{ gcloud_project_id }}"
-        zone: "{{ gcloud_project_zone }}"
-        credentials_file: "{{ _gcloud_auth_key_path }}"
-        service_account_email: "{{ gcloud_service_account }}"
-        disk_type: "pd-ssd"
-        state: present</code></pre>
           </section>
           <section>
             <h2>Creating the cluster</h2>
