@@ -981,6 +981,85 @@ spec:
           <section data-transition="none">
             <img src="images/deployProcess6.png" />
           </section>
+          <section>
+            <h2>updates in place</h2>
+            <p class="fragment">Separate processes for containers, site</p>
+            <p class="fragment">Doesn't leverage k8s effectively</p>
+          </section>
+          <section>
+            <h2>Difficult and slow</h2>
+            <p class="fragment">Needs deployment to each Apache replica</p>
+          </section>
+          <section>
+            <h2>drupal is the app</h2>
+            <p class="fragment">It should <strong>be</strong> the container!</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild6.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild7.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild8.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/k8sBuild9.png" />
+          </section>
+          <section>
+            <h2>images as artifacts</h2>
+            <p class="fragment">Older versions retained in registry</p>
+            <p class="fragment">Enables easier roll-back, troubleshooting</p>
+          </section>
+          <section>
+            <h2>rolling update</h2>
+            <p class="fragment">Replaces running containers with new image</p>
+            <p class="fragment">Performed sequentially, reduces outages</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate   # Use Rolling updates
+    rollingUpdate:
+      maxSurge: 1         # Allow 3 replicas during update
+      maxUnavailable: 1   # Only update 1 at a time
+  minReadySeconds: 5      # Wait 5s before updating the next
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80</code></pre>
+            <small class="fragment">(Scroll down.)</small>
+          </section>
         </section>
 
         <section>
