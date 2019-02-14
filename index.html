@@ -423,7 +423,7 @@
           <section data-transition="none" data-background-transition="none" data-background="images/yamlAllArounYou.png" data-background-size="contain">
             <h1>The YAML is all around you</h1>
           </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy1.png" data-background-size="contain">
+          <!-- <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy1.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy2.png" data-background-size="contain">
@@ -442,13 +442,13 @@
             <h2>Helpful Tutorials</h2>
             <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
             <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">kubernetes.io/docs/tutorials/kubernetes-basics</a></p>
-          </section>
-          <section>
+          </section> -->
+          <section data-background-transition="none" data-background="images/architecture1.png" data-background-size="contain">
             <h2>Architecture</h2>
-            <p class="fragment">Use <a href="https://github.com/ten7/flight-deck">TEN7's Flight Deck</a> for containers</p>
             <p class="fragment">Create 3-worker cluster of <code>g1-small</code> nodes</p>
+            <p class="fragment">Use <a href="https://github.com/ten7/flight-deck">TEN7's Flight Deck</a> for containers</p>
           </section>
-          <section>
+          <!-- <section>
             <h2>Storage</h2>
             <p class="fragment">Host Drupal code, file uploads, MySQL</p>
             <p class="fragment">Needs multi-writer, multi-reader support</p>
@@ -458,22 +458,19 @@
             <p class="fragment">Specified on the Persistent Volume Claim (PVC)</p>
             <p class="fragment"><code>ReadWriteOnce</code> = only one node may read & write</p>
             <p class="fragment"><code>ReadWriteMany</code> = many readers and writers</p>
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/architecture1.png" data-background-size="contain">
-            &nbsp;
-          </section>
+          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture2.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture3.png" data-background-size="contain">
             &nbsp;
           </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/architecture4.png" data-background-size="contain">
+          <!-- <section data-transition="none" data-background-transition="none" data-background="images/architecture4.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture5.png" data-background-size="contain">
             &nbsp;
-          </section>
+          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture6.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -486,13 +483,11 @@
           <section data-transition="none" data-background-transition="none" data-background="images/architecture9.png" data-background-size="contain">
             &nbsp;
           </section>
-          <section>
+          <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: extensions/v1beta1  # k8s' API version for this doc.
+kind: Deployment                # The object type.
 metadata:
-  labels:
-    app: web
   name: web
 spec:
   replicas: 2
@@ -507,7 +502,91 @@ spec:
           name: web
           ports:
             - containerPort: 80</code></pre>
-            <small class="fragment">(Scroll down.)</small>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web    # The name of the deployment.
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80</code></pre>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2      # The number of replicas.
+  template:
+    metadata:
+      labels:
+        app: web   # A key/value pair used by the service.
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80</code></pre>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web  # The docker image to use.
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80</code></pre>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80     # Open port 80.</code></pre>
+            <small>(Scroll down.)</small>
           </section>
           <section>
             <pre><code>---
@@ -581,7 +660,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: memcache
+      app: memcache      # Must match the service selector!
   serviceName: memcache
   replicas: 3
   template:
@@ -589,8 +668,6 @@ spec:
       labels:
         app: memcache
     spec:
-      nodeSelector:
-        tier: workload
       containers:
         - image: "memcached:1.5-alpine"
           imagePullPolicy: Always
@@ -608,8 +685,7 @@ kind: Service
 metadata:
   name: memcache
 spec:
-  # Turn off load balancing!
-  clusterIP: None
+  clusterIP: None     # Turn off load balancing!
   ports:
     - name: memcache
       port: 11211
@@ -635,7 +711,63 @@ spec:
             <p class="fragment">Maps domains names to k8s Services</p>
             <p class="fragment">Can terminate SSL</p>
           </section>
-          <section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "my-cluster-ingress"
+  annotations:
+    ingress.kubernetes.io/app-root: /           # keep logged-in
+    ingress.kubernetes.io/affinity: cookie      # users on the
+    ingress.kubernetes.io/enable-cors: "true"   # same replica.
+spec:
+  tls:
+    - hosts:
+        - "example.com"
+      secretName: ingress
+  backend:
+    serviceName: varnish
+    servicePort: 6081
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: varnish
+              servicePort: 6081</code></pre>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "my-cluster-ingress"
+  annotations:
+    ingress.kubernetes.io/app-root: /
+    ingress.kubernetes.io/affinity: cookie
+    ingress.kubernetes.io/enable-cors: "true"
+spec:
+  tls:
+    - hosts:
+        - "example.com"    # Use HTTPS for this domain name.
+      secretName: ingress  # The cert chain is stored here.
+  backend:
+    serviceName: varnish
+    servicePort: 6081
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: varnish
+              servicePort: 6081</code></pre>
+            <small>&nbsp;</small>
+          </section>
+          <section data-transition="none">
             <pre><code>---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -654,14 +786,14 @@ spec:
     serviceName: varnish
     servicePort: 6081
   rules:
-    - host: example.com
+    - host: example.com             # For this domain name...
       http:
         paths:
-          - path: /*
+          - path: /*                # ...on this path...
             backend:
-              serviceName: varnish
-              servicePort: 6081</code></pre>
-            <small class="fragment">(Scroll down.)</small>
+              serviceName: varnish  # ...map to this service...
+              servicePort: 6081     # ...on this port.</code></pre>
+            <small>(Scroll down.)</small>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture21.png" data-background-size="contain">
             &nbsp;
@@ -897,8 +1029,6 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    app: web
   name: web
 spec:
   replicas: 2
@@ -931,8 +1061,6 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    app: web
   name: web
 spec:
   replicas: 2
@@ -956,6 +1084,14 @@ spec:
           ports:
             - containerPort: 80</code></pre>
             <small class="fragment">(Scroll down.)</small>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Further reading</h2>
+            <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
+            <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Interactive tutorial on kubernetes.io</a></p>
           </section>
         </section>
 
