@@ -18,8 +18,8 @@
 			<div class="slides">
         <section>
           <h1>Return <small>of the</small> Clustering</h1>
-          <p>&nbsp;</p>
-          <p>use &larr;&uarr;&darr;&rarr; or &lt;space&gt;</p>
+          <p>Kubernetes for Drupal</p>
+          <small><br/>use &larr;&uarr;&darr;&rarr; or &lt;space&gt;</small>
         </section>
 
         <section>
@@ -145,7 +145,7 @@
           <section>
             <h2>Passing config</h2>
             <p class="fragment">Avoid Compose-style environment variables</p>
-            <p class="fragment">Use <a href="https://docs.docker.com/engine/swarm/secrets/">Secrets</a> instead</p>
+            <p class="fragment">Use <a href="https://docs.docker.com/engine/swarm/secrets/">Secrets</a>, <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">Config Maps</a> instead</p>
           </section>
           <section data-transition="none">
             <img src="images/multipledockerhosts01.png" />
@@ -322,7 +322,7 @@
             <p class="fragment">Internal, external, load-balanced</p>
           </section>
           <section>
-            <h2>volume Claim</h2>
+            <h2>volume Claim (pvc)</h2>
             <p class="fragment">A request for persistent storage</p>
             <p class="fragment">How much, from where, sharability</p>
           </section>
@@ -390,7 +390,7 @@
             <h2>Storage still tricky</h2>
             <p class="fragment">Traditionally-managed NFS</p>
             <p class="fragment"><a href="https://ceph.com/">Ceph</a>, <a href="https://rook.io/">Rook</a>, <a href="https://github.com/heketi/heketi">Heketi</a> have k8s integration</p>
-            <p class="fragment">Alternative: <a href="https://www.drupal.org/project/s3fs">S3 File System</a>, <a href="https://www.drupal.org/project/flysystem_s3">FlySystem s3</a><span class="fragment">?</span></p>
+            <!-- <p class="fragment">Alternative: <a href="https://www.drupal.org/project/s3fs">S3 File System</a>, <a href="https://www.drupal.org/project/flysystem_s3">FlySystem s3</a><span class="fragment">?</span></p> -->
           </section>
           <section data-transition="none">
             <img src="images/easierWay1.png" />
@@ -574,7 +574,16 @@ spec:
     app: web
   type: LoadBalancer</code></pre>
           </section>
-          <section>
+          <section data-transition="none" data-background-transition="none" data-background="images/wheresTheDB1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/wheresTheDB2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/wheresTheDB3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="none" data-background="images/wheresTheDB4.png" data-background-size="contain">
             <h2>Secrets</h2>
             <p class="fragment">Defined as a their own object</p>
             <p class="fragment">Mounted into the deployment as a disk</p>
