@@ -7,6 +7,7 @@
  @import url('../../lib/font/star_jedi/star-jedi.css');
  @import url('../../lib/font/news-cycle/news-cycle.css');
  @import url('../../lib/font/Source_Code_Pro/source-code-pro.css');
+ @import url('../../lib/font/Montserrat/montserrat.css');
 
 /*********************************************
  * GLOBAL STYLES
@@ -68,6 +69,13 @@ body {
 
 .reveal h2 {
   font-size: 1.7em; }
+
+.reveal .ten7 {
+  font-family: "Montserrat", Impact, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #bed600;
+}
 
 .reveal h3 {
   font-size: 1.3em; }
