@@ -351,10 +351,6 @@
             <p class="fragment">No reliance on special APIs</p>
             <p class="fragment">Requires staff to manage cluster, set up storage</p>
           </section>
-          <!-- <section>
-            <h2>Privacy</h2>
-            <p class="fragment">Country-local, legal requirements</p>
-          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/installK8s1.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -423,54 +419,17 @@
           <section data-transition="none" data-background-transition="none" data-background="images/yamlAllArounYou.png" data-background-size="contain">
             <h1>The YAML is all around you</h1>
           </section>
-          <!-- <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy1.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy2.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy3.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy4.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/kindaWordy5.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-background-transition="none" data-background="images/kindaWordy6.png" data-background-size="contain">
-            <h2>Helpful Tutorials</h2>
-            <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
-            <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">kubernetes.io/docs/tutorials/kubernetes-basics</a></p>
-          </section> -->
           <section data-background-transition="none" data-background="images/architecture1.png" data-background-size="contain">
             <h2>Architecture</h2>
             <p class="fragment">Create 3-worker cluster of <code>g1-small</code> nodes</p>
             <p class="fragment">Use <a href="https://github.com/ten7/flight-deck">TEN7's Flight Deck</a> for containers</p>
           </section>
-          <!-- <section>
-            <h2>Storage</h2>
-            <p class="fragment">Host Drupal code, file uploads, MySQL</p>
-            <p class="fragment">Needs multi-writer, multi-reader support</p>
-          </section>
-          <section>
-            <h2>Access modes</h2>
-            <p class="fragment">Specified on the Persistent Volume Claim (PVC)</p>
-            <p class="fragment"><code>ReadWriteOnce</code> = only one node may read & write</p>
-            <p class="fragment"><code>ReadWriteMany</code> = many readers and writers</p>
-          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture2.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture3.png" data-background-size="contain">
             &nbsp;
           </section>
-          <!-- <section data-transition="none" data-background-transition="none" data-background="images/architecture4.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/architecture5.png" data-background-size="contain">
-            &nbsp;
-          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture6.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -585,7 +544,7 @@ spec:
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80     # Open port 80.</code></pre>
+            - containerPort: 80          # Open port 80.</code></pre>
             <small>(Scroll down.)</small>
           </section>
           <section>
@@ -603,6 +562,51 @@ spec:
   selector:
     app: web
   type: LoadBalancer</code></pre>
+          </section>
+          <section>
+            <h2>Secrets</h2>
+            <p class="fragment">Defined as a their own object</p>
+            <p class="fragment">Mounted into the deployment as a disk</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql
+data:
+  MYSQL_ROOT_PASSWORD: "YXZlcnliYWRwYXNzd29yZAo="   # These
+  MYSQL_DATABASE: "ZHJ1cGFsX2Ri"                    # must be
+  MYSQL_USER: "ZHJ1cGFs"                            # base64
+  MYSQL_PASSWORD: "cGFzc3dvcmQ="                    # encoded.</code></pre>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: ten7/flight-deck-web
+          imagePullPolicy: Always
+          name: web
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: vol-secrets-db       # Define where to mount
+              mountPath: /secrets/mysql  # our DB credentials.
+      volumes:
+        - name: vol-secrets-db           # Create a "disk"
+          secret:                        # for or mysql secret.
+            secretName: mysql</code></pre>
+            <small>(Scroll down.)</small>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture9.png" data-background-size="contain">
             &nbsp;
@@ -794,6 +798,23 @@ spec:
               serviceName: varnish  # ...map to this service...
               servicePort: 6081     # ...on this port.</code></pre>
             <small>(Scroll down.)</small>
+          </section>
+          <section>
+            <h2>ingress tls secret</h2>
+            <p class="fragment">Provides the combined cert chain...</p>
+            <p class="fragment">...and the private key.</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+data:
+  tls.crt: "base64_encoded_cert_chain"
+  tls.key: "base64_encoded_private_key"
+kind: Secret
+metadata:
+  name: ingress
+  namespace: default
+type: Opaque</code></pre>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture21.png" data-background-size="contain">
             &nbsp;
