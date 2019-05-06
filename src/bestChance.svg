@@ -113,17 +113,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="608.70584"
+     inkscape:zoom="1.41"
+     inkscape:cx="580.33705"
      inkscape:cy="444.77996"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
      inkscape:window-width="3200"
-     inkscape:window-height="1745"
+     inkscape:window-height="1672"
      inkscape:window-x="0"
-     inkscape:window-y="55"
+     inkscape:window-y="54"
      inkscape:window-maximized="1"
      showguides="true" />
   <metadata
@@ -134,7 +134,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
       </cc:Work>
@@ -464,7 +464,7 @@
      inkscape:groupmode="layer"
      id="layer14"
      inkscape:label="looking ahead"
-     style="display:inline">
+     style="display:none">
     <path
        inkscape:connector-curvature="0"
        d="m 914.79558,611.85441 c 0,-3.71857 1.3264,-6.73309 2.9626,-6.73309 1.6362,0 2.9627,3.01452 2.9627,6.73309 0,3.71861 -1.3265,6.73313 -2.9627,6.73313 -1.6362,0 -2.9626,-3.01452 -2.9626,-6.73313 z"
@@ -496,7 +496,7 @@
      inkscape:groupmode="layer"
      id="layer15"
      inkscape:label="smile"
-     style="display:none">
+     style="display:inline">
     <g
        style="display:inline"
        id="g2102"
@@ -734,7 +734,7 @@
        xml:space="preserve"
        id="flowRoot4762-8-9-7-1-5-4-5-0-4-5-8-3-3-24"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="matrix(0.92801382,0,0,0.92801382,244.04834,431.30971)"><flowRegion
+       transform="matrix(0.92801382,0,0,0.92801382,242.04834,435.30971)"><flowRegion
          id="flowRegion4764-7-6-2-5-1-0-8-4-6-8-1-8-0-0"
          style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
            id="rect4766-7-8-5-9-7-9-7-8-9-62-3-0-9-6"
@@ -744,7 +744,7 @@
            y="229.97247"
            style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
          style="font-size:30px;line-height:1.25;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"
-         id="flowPara6493-7-4-0-1-7-2-84-1-5-2-2">Let's give ourselves the best chance at success.</flowPara></flowRoot>    <path
+         id="flowPara6493-7-4-0-1-7-2-84-1-5-2-2">And the pricing is much clearer too!</flowPara></flowRoot>    <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 859.13477,611.67969 c -60.74979,-9.23653 -116.48093,-5.56796 -164.04883,19.09179 l 4.16015,1.7754 c -49.78855,-10.68424 -114.18102,-16.60078 -180.9375,-16.625 -150.35327,-3e-5 -272.23821,29.28436 -272.23632,65.4082 0.003,36.12308 121.88622,65.40628 272.23632,65.40625 150.3501,3e-5 272.23373,-29.28317 272.23633,-65.40625 -0.0957,-10.93901 -11.60901,-21.69756 -33.48633,-31.29102 4.44615,-25.77246 62.38032,-28.06239 102.07618,-38.35937 z"
        id="path1276"
