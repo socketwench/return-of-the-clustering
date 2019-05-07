@@ -16,8 +16,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="bestChance.svg"
-   inkscape:export-filename="../images/bestChance2.png"
+   sodipodi:docname="gettingIntoDO.svg"
+   inkscape:export-filename="../images/gettingIntoDO3.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -113,11 +113,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.41"
-     inkscape:cx="580.33705"
-     inkscape:cy="444.77996"
+     inkscape:zoom="1.5612973"
+     inkscape:cx="422.54086"
+     inkscape:cy="396.4955"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer6"
      showgrid="false"
      units="px"
      inkscape:window-width="3200"
@@ -134,7 +134,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
       </cc:Work>
@@ -464,7 +464,7 @@
      inkscape:groupmode="layer"
      id="layer14"
      inkscape:label="looking ahead"
-     style="display:none">
+     style="display:inline">
     <path
        inkscape:connector-curvature="0"
        d="m 914.79558,611.85441 c 0,-3.71857 1.3264,-6.73309 2.9626,-6.73309 1.6362,0 2.9627,3.01452 2.9627,6.73309 0,3.71861 -1.3265,6.73313 -2.9627,6.73313 -1.6362,0 -2.9626,-3.01452 -2.9626,-6.73313 z"
@@ -496,7 +496,7 @@
      inkscape:groupmode="layer"
      id="layer15"
      inkscape:label="smile"
-     style="display:inline">
+     style="display:none">
     <g
        style="display:inline"
        id="g2102"
@@ -613,7 +613,7 @@
     <g
        style="display:inline;fill:none;fill-opacity:1;stroke:#e8e8e8;stroke-opacity:1"
        id="g3703"
-       transform="matrix(1.4391595e-4,0,0,-1.4391595e-4,904.50612,613.13572)">
+       transform="matrix(1.4391595e-4,0,0,-1.4391595e-4,904.50612,605.13572)">
       <path
          inkscape:connector-curvature="0"
          d="M 0.0153656,0.03601074 41172.02,29558.02"
@@ -623,7 +623,7 @@
     <g
        style="display:inline;fill:none;fill-opacity:1;stroke:#e8e8e8;stroke-opacity:1"
        id="g3707"
-       transform="matrix(-1.4391595e-4,0,0,-1.4391595e-4,929.82557,614.25138)">
+       transform="matrix(-1.4391595e-4,0,0,-1.4391595e-4,929.82557,606.25138)">
       <path
          inkscape:connector-curvature="0"
          d="M -0.04048157,-0.00390625 41171.96,29557.98"
@@ -632,12 +632,12 @@
     </g>
     <path
        inkscape:connector-curvature="0"
-       d="m 904.30837,621.84374 c 0,-3.71865 1.32644,-6.73312 2.96266,-6.73312 1.63623,0 2.96265,3.01447 2.96265,6.73312 0,3.71855 -1.32642,6.73311 -2.96265,6.73311 -1.63622,0 -2.96266,-3.01456 -2.96266,-6.73311 z"
+       d="m 904.30837,613.84374 c 0,-3.71865 1.32644,-6.73312 2.96266,-6.73312 1.63623,0 2.96265,3.01447 2.96265,6.73312 0,3.71855 -1.32642,6.73311 -2.96265,6.73311 -1.63622,0 -2.96266,-3.01456 -2.96266,-6.73311 z"
        style="display:inline;fill:#e8e8e8;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.16001725;stroke-opacity:1"
        id="path3719" />
     <path
        inkscape:connector-curvature="0"
-       d="m 924.32517,621.84374 c 0,-3.71865 1.3265,-6.73312 2.9627,-6.73312 1.6362,0 2.9626,3.01447 2.9626,6.73312 0,3.71855 -1.3264,6.73311 -2.9626,6.73311 -1.6362,0 -2.9627,-3.01456 -2.9627,-6.73311 z"
+       d="m 924.32517,613.84374 c 0,-3.71865 1.3265,-6.73312 2.9627,-6.73312 1.6362,0 2.9626,3.01447 2.9626,6.73312 0,3.71855 -1.3264,6.73311 -2.9626,6.73311 -1.6362,0 -2.9627,-3.01456 -2.9627,-6.73311 z"
        style="display:inline;fill:#e8e8e8;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.16001725;stroke-opacity:1"
        id="path3721" />
   </g>
@@ -732,23 +732,47 @@
            y="475.82053" /></flowRegion><flowPara
          id="flowPara1060" /></flowRoot>    <flowRoot
        xml:space="preserve"
-       id="flowRoot4762-8-9-7-1-5-4-5-0-4-5-8-3-3-24"
+       id="flowRoot4762-8-9-7-1-5-4-5-0-4-5-8-3-4-5-2"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="matrix(0.92801382,0,0,0.92801382,242.04834,435.30971)"><flowRegion
-         id="flowRegion4764-7-6-2-5-1-0-8-4-6-8-1-8-0-0"
+       transform="matrix(0.92801382,0,0,0.92801382,549.31113,67.267637)"><flowRegion
+         id="flowRegion4764-7-6-2-5-1-0-8-4-6-8-1-8-9-6-2"
          style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
-           id="rect4766-7-8-5-9-7-9-7-8-9-62-3-0-9-6"
-           width="534.89807"
-           height="106.53327"
+           id="rect4766-7-8-5-9-7-9-7-8-9-62-3-0-9-5-1"
+           width="332.97043"
+           height="186.93631"
            x="30.692846"
            y="229.97247"
            style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
          style="font-size:30px;line-height:1.25;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"
-         id="flowPara6493-7-4-0-1-7-2-84-1-5-2-2">And the pricing is much clearer too!</flowPara></flowRoot>    <path
+         id="flowPara6493-7-4-0-1-7-2-84-1-5-0-4-7">Now that we know the cluster will look like...</flowPara></flowRoot>    <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 859.13477,611.67969 c -60.74979,-9.23653 -116.48093,-5.56796 -164.04883,19.09179 l 4.16015,1.7754 c -49.78855,-10.68424 -114.18102,-16.60078 -180.9375,-16.625 -150.35327,-3e-5 -272.23821,29.28436 -272.23632,65.4082 0.003,36.12308 121.88622,65.40628 272.23632,65.40625 150.3501,3e-5 272.23373,-29.28317 272.23633,-65.40625 -0.0957,-10.93901 -11.60901,-21.69756 -33.48633,-31.29102 4.44615,-25.77246 62.38032,-28.06239 102.07618,-38.35937 z"
-       id="path1276"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccsccc" />
+       d="m 733.04492,252.52734 a 154.67906,98.315674 0 0 0 -154.67969,98.31446 154.67906,98.315674 0 0 0 154.67969,98.3164 154.67906,98.315674 0 0 0 80.75391,-14.55859 l 64.3164,100.38477 -30.81835,-118.04102 A 154.67906,98.315674 0 0 0 887.72266,350.8418 154.67906,98.315674 0 0 0 733.04492,252.52734 Z"
+       id="path3588"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Layer 2"
+     style="display:inline">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4762-8-9-7-1-5-4-5-0-4-5-8-3-4-5-2-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.92801382,0,0,0.92801382,392.31753,354.54456)"><flowRegion
+         id="flowRegion4764-7-6-2-5-1-0-8-4-6-8-1-8-9-6-2-3"
+         style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
+           id="rect4766-7-8-5-9-7-9-7-8-9-62-3-0-9-5-1-8"
+           width="291.55984"
+           height="191.76755"
+           x="30.692846"
+           y="229.97247"
+           style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
+         style="font-size:30px;line-height:1.25;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"
+         id="flowPara6493-7-4-0-1-7-2-84-1-5-0-4-7-3">How do we get it into digitalocean?</flowPara></flowRoot>    <path
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 552.10547,542.0293 a 170.37114,83.584335 0 0 0 -170.37109,83.58398 170.37114,83.584335 0 0 0 170.37109,83.58594 170.37114,83.584335 0 0 0 169.87305,-78.69531 L 840.32617,606.71875 713.44141,599.08203 A 170.37114,83.584335 0 0 0 552.10547,542.0293 Z"
+       id="path8666"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

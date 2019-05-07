@@ -411,18 +411,18 @@
           </section>
           <section>
             <h2>Providers</h2>
-            <p class="fragment">Amazon, Google GKE, Azure, Digital Ocean, others</p>
+            <p class="fragment">Amazon, Azure, DigitalOcean, Google GKE, others</p>
             <p class="fragment"><a href="https://kubernetes.io/docs/setup/pick-right-solution/">kubernetes.io/docs/setup/pick-right-solution</a></p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/bestChance1.png" data-background-size="contain">
-            <h2>GKE</h2>
-            <p class="fragment">"The standard" in managed k8s</p>
-            <p class="fragment">Integrates with Compute Engine, strong API support</p>
+            <h2>Digitalocean</h2>
+            <p class="fragment">World-wide k8s provider</p>
+            <p class="fragment">REST-based API</p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/bestChance2.png" data-background-size="contain">
-            <h2>GKE</h2>
-            <p class="">"The standard" in managed k8s</p>
-            <p class="">Integrates with Compute Engine, strong API support</p>
+            <h2>Digitalocean</h2>
+            <p class="">World-wide k8s provider</p>
+            <p class="">REST-based API</p>
           </section>
         </section>
 
@@ -432,13 +432,19 @@
           </section>
           <section data-background-transition="none" data-background="images/architecture1.png" data-background-size="contain">
             <h2>Architecture</h2>
-            <p class="fragment">Create 3-worker cluster of <code>g1-small</code> nodes</p>
+            <p class="fragment">Create 3-worker cluster of <code>s-1vcpu-2gb</code> nodes</p>
             <p class="fragment">Use <a href="https://github.com/ten7/flight-deck">TEN7's Flight Deck</a> for containers</p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture2.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/architecture4.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/architecture5.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture6.png" data-background-size="contain">
@@ -471,7 +477,12 @@ spec:
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
           <section data-transition="none">
@@ -492,7 +503,12 @@ spec:
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
           <section data-transition="none">
@@ -513,7 +529,12 @@ spec:
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
           <section data-transition="none">
@@ -530,11 +551,16 @@ spec:
         app: web
     spec:
       containers:
-        - image: ten7/flight-deck-web  # The docker image to use.
+        - image: ten7/flight-deck-web        # The image to use.
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"  # The image to use.
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
           <section data-transition="none">
@@ -555,7 +581,12 @@ spec:
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80          # Open port 80.</code></pre>
+            - containerPort: 80             # Open port 80.
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081           # Open port 6081.</code></pre>
             <small>(Scroll down.)</small>
           </section>
           <section>
@@ -566,10 +597,10 @@ metadata:
   name: web
 spec:
   ports:
-    -
-      name: http
+    - name: http
       port: 80
-      protocol: TCP
+    - name: varnish
+      port: 6081
   selector:
     app: web
   type: LoadBalancer</code></pre>
@@ -622,6 +653,11 @@ spec:
           volumeMounts:
             - name: vol-secrets-db       # Define where to mount
               mountPath: /secrets/mysql  # our DB credentials.
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081
       volumes:
         - name: vol-secrets-db           # Create a "disk"
           secret:                        # for or mysql secret.
@@ -639,8 +675,8 @@ spec:
           </section>
           <section>
             <h2>Provisioning pvcs</h2>
-            <p class="fragment">GKE, Digital Ocean: Single writer only!</p>
-            <p class="fragment">Can't use for multiple Apache pods</p>
+            <p class="fragment">DigitalOcean, GKE, others: Single writer only!</p>
+            <p class="fragment">Can't use for multiple web pods</p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture12.png" data-background-size="contain">
             &nbsp;
@@ -731,7 +767,7 @@ spec:
           </section>
           <section>
             <h2>ingress</h2>
-            <p class="fragment">k8s-provided edge load balancer</p>
+            <p class="fragment">k8s-managed edge load balancer</p>
             <p class="fragment">Maps domains names to k8s Services</p>
             <p class="fragment">Can terminate SSL</p>
           </section>
@@ -779,7 +815,7 @@ spec:
         - "example.com"    # Use HTTPS for this domain name.
       secretName: ingress  # The cert chain is stored here.
   backend:
-    serviceName: varnish
+    serviceName: web
     servicePort: 6081
   rules:
     - host: example.com
@@ -787,7 +823,7 @@ spec:
         paths:
           - path: /*
             backend:
-              serviceName: varnish
+              serviceName: web
               servicePort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
@@ -807,7 +843,7 @@ spec:
         - "example.com"
       secretName: ingress
   backend:
-    serviceName: varnish
+    serviceName: web
     servicePort: 6081
   rules:
     - host: example.com             # For this domain name...
@@ -815,7 +851,7 @@ spec:
         paths:
           - path: /*                # ...on this path...
             backend:
-              serviceName: varnish  # ...map to this service...
+              serviceName: web      # ...map to this service...
               servicePort: 6081     # ...on this port.</code></pre>
             <small>(Scroll down.)</small>
           </section>
@@ -846,13 +882,13 @@ type: Opaque</code></pre>
 
         <section>
           <section data-transition="none">
-            <img src="images/gettingIntoGke1.png" />
+            <img src="images/gettingIntoDO1.png" />
           </section>
           <section data-transition="none">
-            <img src="images/gettingIntoGke2.png" />
+            <img src="images/gettingIntoDO2.png" />
           </section>
           <section data-transition="none">
-            <img src="images/gettingIntoGke3.png" />
+            <img src="images/gettingIntoDO3.png" />
           </section>
           <section data-background-transition="none" data-background="images/yavin.png" data-background-size="contain">
             <h1>The buildchain of yavin</h1>
@@ -902,67 +938,73 @@ type: Opaque</code></pre>
           </section>
           <section>
             <h2>Authentication</h2>
-            <p class="fragment">Use a <a href="https://cloud.google.com/compute/docs/access/service-accounts">service account</a>, not a user account!</p>
-            <p class="fragment"><code>gcloud auth activate-service-account</code></p>
-          </section>
-          <section>
-            <pre><code>---
-- hosts: kubectl
-  tasks:
-    - name: Deploy the gcloud key
-      template:
-        src: "templates/gcloud/service-account-key.json.j2"
-        dest: "{{ _gcloud_auth_key_path }}"
-    - name: Authorize the service account
-      shell: >
-        gcloud auth activate-service-account
-        {{ _gcloud_service_account }}
-        --key-file={{ gcloud_auth_key_path }}</code></pre>
+            <p class="fragment">Create a <a href="https://www.digitalocean.com/docs/api/create-personal-access-token/">Personal Access Token</a></p>
+            <p class="fragment">Passed to DigitalOcean API as HTTP header</p>
           </section>
           <section>
             <h2>Creating the cluster</h2>
-            <p class="fragment">Ansible <code>gcp_container_cluster</code> module</p>
-            <p class="fragment">Allocates worker nodes all in one command!</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/socketwench/digitalocean"><code>socketwench.digitalocean</code></a> role on Ansible Galaxy</p>
+            <p class="fragment">Handles scaling, node pools, adds ingress controller</p>
           </section>
           <section>
-            <pre><code>    - name: create a cluster
-      gcp_container_cluster:
-        name: "{{ gke_cluster_name }}"
-        initial_node_count: "{{ gke_cluster_size_min | default(3) }}"
-        node_config:
-          machine_type: "g1-small"
-          disk_size_gb: 100
-        zone: "{{ gcloud_project_zone }}"
-        project: "{{ gcloud_project_id }}"
-        auth_kind: serviceaccount
-        service_account_file: "{{ _gcloud_auth_key_path }}"
-        scopes:
-          - "https://www.googleapis.com/auth/cloud-platform"
-        state: present</code></pre>
+            <pre><code>---
+- hosts: all
+  vars:
+    digitalocean_api_token: "abcde1234567890"
+    digitalocean_clusters:
+      - name: "my_k8s_cluser"
+        region: "sfo2"
+        node_pools:
+          - size: "s-1vcpu-2gb"
+            count: 3
+            name: "web-pool"
+            labels:
+              - key: "app"
+                value: "web"
+          - size: "s-1vcpu-2gb"
+            count: 1
+            name: "db-pool"
+            labels:
+              - key: "app"
+                value: "database"
+  roles:
+    - socketwench.digitalocean</code></pre>
+            <small class="fragment">(Scroll down.)</small>
           </section>
           <section>
             <h2>Authorizing kubectl</h2>
-            <p class="fragment">Use gcloud API to get k8s auth token</p>
-            <p class="fragment">Necessary for deploying containers</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/socketwench/digitalocean_kubeconfig"><code>socketwench.digitalocean_kubeconfig</code></a> role</p>
+            <p class="fragment">Gets the auth file from DO API</p>
           </section>
           <section>
-            <pre><code>    - name: Set the current cluster
-      shell: >
-        gcloud --quiet config set container/cluster
-        {{ gke_cluster_name }}
-    - name: Get the cluster credentials
-      shell: >
-        gcloud container clusters get-credentials
-        {{ gke_cluster_name }}</code></pre>
+            <pre><code>    - name: Get the kubeconfig file.
+      import_role:
+        name: socketwench.digitalocean_kubeconfig
+      vars:
+        digitalocean_kubeconfig:
+          cluster: "my_k8s_cluser"
+          kubeconfig: "/path/to/my/kubeconfig.yaml"</code></pre>
           </section>
           <section>
             <h2>Writing the k8s yaml</h2>
-            <p class="fragment">Combine per-object YAML using <code>Assemble</code></p>
-            <p class="fragment">Use <code>Template</code> to write variables</p>
+            <p class="fragment">Ansible <a href="https://docs.ansible.com/ansible/latest/modules/template_module.html"><code>Template</code></a> module</p>
+            <p class="fragment">Replaces placeholders in k8s files with values</p>
+          </section>
+          <section>
+            <pre><code>---
+apiVersion: v1
+data:
+  tls.crt: "{{ ingress_tls_cert | b64encode }}"
+  tls.key: "{{ ingress_tls_key | b64encode }}"
+kind: Secret
+metadata:
+  name: ingress
+type: Opaque</code></pre>
           </section>
           <section>
             <h2>Deploying containers</h2>
-            <p class="fragment">Ansible <code>k8s</code> module</p>
+            <p class="fragment">Ansible <a href="https://docs.ansible.com/ansible/latest/modules/k8s_module.html"><code>k8s</code></a> module</p>
+            <p class="fragment">Pass auth file as <code>kubeconfig</code> param</p>
             <p class="fragment">Loop over all templated files, applying config</p>
           </section>
           <section>
@@ -974,11 +1016,10 @@ type: Opaque</code></pre>
             <pre><code>    - name: Apply the definitions
       k8s:
         state: present
-        namespace: "{{ item.namespace | default('default') }}"
-        src: "{{ item.filename }}"
-      loop: "{{ k8s_yaml_files }}"
-      environment:
-        GOOGLE_APPLICATION_CREDENTIALS: "{{ _gcloud_auth_key_path }}"</code></pre>
+        namespace: "example-com"                    # Avoid dots!
+        kubeconfig: "/path/to/my/kubeconfig.yaml"
+        src: "{{ item }}"
+      loop: "{{ k8s_yaml_files }}"</code></pre>
           </section>
         </section>
 
@@ -1064,6 +1105,7 @@ type: Opaque</code></pre>
             <h2>private registry</h2>
             <p class="fragment">Stores built, site-specific images</p>
             <p class="fragment">k8s needs auth token pass in Secrets</p>
+            <p class="fragment"><a href="https://docs.docker.com/registry/deploying/">Tutorial on docs.docker.com</a></p>
           </section>
           <section>
             <pre><code>---
@@ -1082,11 +1124,16 @@ spec:
         - name: my-registry-key  # Needed to auth with registry
       containers:
         # Site-specific image, with tags as version
-        - image: builds.t7.io:5000/example.com:latest
+        - image: myRegistry.tld:5000/example.com:1.0.7
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
               <small class="fragment">(Scroll down.)</small>
           </section>
           <section data-background-transition="none" data-background="images/butHowDoWeUpdate1.png" data-background-size="contain">
@@ -1119,11 +1166,16 @@ spec:
       imagePullSecrets:
         - name: my-registry-key
       containers:
-        - image: builds.t7.io:5000/example.com:latest
+        - image: myRegistry.tld:5000/example.com:1.0.7
           imagePullPolicy: Always
           name: web
           ports:
-            - containerPort: 80</code></pre>
+            - containerPort: 80
+        - image: "ten7/flight-deck-varnish"
+          imagePullPolicy: Always
+          name: varnish
+          ports:
+            - containerPort: 6081</code></pre>
             <small class="fragment">(Scroll down.)</small>
           </section>
         </section>
@@ -1133,15 +1185,28 @@ spec:
             <h2>Further reading</h2>
             <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
             <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Interactive tutorial on kubernetes.io</a></p>
+            <p class="fragment"><a href="https://developers.digitalocean.com/documentation/v2/">DigitalOcean API Docs</a></p>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Special thanks</h2>
-            <p class="fragment">Drupalcamp Florida</p>
+            <p class="fragment">Drupaldelphia</p>
             <p class="fragment"><a href="https://ten7.com/">TEN7</a></p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
+          </section>
+
+          <section data-background-transition="fade" data-background="images/thereIsAnother1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="fade" data-background="images/thereIsAnother2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="none" data-background="images/thereIsAnother3.png" data-background-size="contain">
+            <h2>Free stuff!</h2>
+            <p class="fragment">$100 credit on DigitalOcean</p>
+            <p class="fragment"><a href="https://t7.io/do100"><code>ten7.com/digitalocean</code></a></p>
           </section>
 
           <section data-background-transition="none" data-background="images/thankYou.png" data-background-size="contain">
