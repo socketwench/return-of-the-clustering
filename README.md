@@ -1,6 +1,6 @@
 # Return of the Clustering
 
-A Reveal.js presentation on Drupal running on Google Kubernetes Engine
+A Reveal.js presentation on Drupal running on DigitalOcean Kubernetes
 
 ## Summary
 
