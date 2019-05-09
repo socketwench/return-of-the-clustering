@@ -15,10 +15,15 @@ The slides themselves are available at [socketwench.github.io/return-of-the-clus
 ## Speaklog
 
 * Florida Drupalcamp 2019
+* Drupaldelphia 2019
+* Flyover Camp 2019
+* Twin Cities Drupal 2019
 
 ## Changelog
 
-* TBA
+* 2.0: Updated to use Digitalocean
+* 2.1: Minor fixes
+* 2.1.1: More minor fixes
 
 ## Reveal.js
 
