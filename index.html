@@ -492,7 +492,7 @@ kind: Deployment
 metadata:
   name: web    # The name of the deployment.
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -518,7 +518,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2      # The number of replicas.
+  replicas: 3      # The number of replicas.
   template:
     metadata:
       labels:
@@ -544,7 +544,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -570,7 +570,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -638,7 +638,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -786,16 +786,13 @@ spec:
     - hosts:
         - "example.com"
       secretName: ingress
-  backend:
-    serviceName: varnish
-    servicePort: 6081
   rules:
     - host: example.com
       http:
         paths:
-          - path: /*
+          - path: /
             backend:
-              serviceName: varnish
+              serviceName: web
               servicePort: 6081</code></pre>
             <small>&nbsp;</small>
           </section>
@@ -814,14 +811,11 @@ spec:
     - hosts:
         - "example.com"    # Use HTTPS for this domain name.
       secretName: ingress  # The cert chain is stored here.
-  backend:
-    serviceName: web
-    servicePort: 6081
   rules:
     - host: example.com
       http:
         paths:
-          - path: /*
+          - path: /
             backend:
               serviceName: web
               servicePort: 6081</code></pre>
@@ -842,14 +836,11 @@ spec:
     - hosts:
         - "example.com"
       secretName: ingress
-  backend:
-    serviceName: web
-    servicePort: 6081
   rules:
     - host: example.com             # For this domain name...
       http:
         paths:
-          - path: /*                # ...on this path...
+          - path: /                 # ...on this path...
             backend:
               serviceName: web      # ...map to this service...
               servicePort: 6081     # ...on this port.</code></pre>
@@ -1114,7 +1105,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -1151,7 +1142,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   strategy:
     type: RollingUpdate   # Use Rolling updates
     rollingUpdate:
