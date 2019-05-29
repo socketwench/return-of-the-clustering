@@ -17,7 +17,7 @@
    version="1.1"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
    sodipodi:docname="butHowDoWeUpdate.svg"
-   inkscape:export-filename="../images/butHowDoWeUpdate2.png"
+   inkscape:export-filename="../images/butHowDoWeUpdate3.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -113,17 +113,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1040039"
-     inkscape:cx="505.33006"
-     inkscape:cy="281.15933"
+     inkscape:zoom="1.5612973"
+     inkscape:cx="515.98391"
+     inkscape:cy="251.83711"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer6"
      showgrid="false"
      units="px"
      inkscape:window-width="3200"
-     inkscape:window-height="1745"
+     inkscape:window-height="1672"
      inkscape:window-x="0"
-     inkscape:window-y="55"
+     inkscape:window-y="54"
      inkscape:window-maximized="1"
      showguides="true" />
   <metadata
@@ -134,7 +134,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
       </cc:Work>
@@ -432,7 +432,7 @@
      inkscape:groupmode="layer"
      id="layer10"
      inkscape:label="looking up"
-     style="display:inline">
+     style="display:none">
     <path
        inkscape:connector-curvature="0"
        d="m 909.05289,605.51324 c 0,-3.71857 1.32642,-6.73309 2.96264,-6.73309 1.63624,0 2.96266,3.01452 2.96266,6.73309 0,3.71861 -1.32642,6.73313 -2.96266,6.73313 -1.63622,0 -2.96264,-3.01452 -2.96264,-6.73313 z"
@@ -496,7 +496,7 @@
      inkscape:groupmode="layer"
      id="layer15"
      inkscape:label="smile"
-     style="display:none">
+     style="display:inline">
     <g
        style="display:inline"
        id="g2102"
@@ -745,9 +745,33 @@
            style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
          style="font-size:30px;line-height:1.25;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"
          id="flowPara6493-7-4-0-1-7-2-84-1-5-0-0">But how do we control the update?</flowPara></flowRoot>    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:3.9987402;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 611.93945,395.92969 A 167.57187,72.916412 0 0 0 444.36719,468.8457 167.57187,72.916412 0 0 0 611.93945,541.76172 167.57187,72.916412 0 0 0 751.2793,509.28125 l 85.67382,49.91602 -66.69531,-66.69532 a 167.57187,72.916412 0 0 0 9.25391,-23.65625 167.57187,72.916412 0 0 0 -167.57227,-72.91601 z"
        id="path4860"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Layer 2">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4762-8-9-7-1-5-4-5-0-4-5-8-3-4-8-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.92801382,0,0,0.92801382,312.70768,413.47943)"><flowRegion
+         id="flowRegion4764-7-6-2-5-1-0-8-4-6-8-1-8-9-8-0"
+         style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
+           id="rect4766-7-8-5-9-7-9-7-8-9-62-3-0-9-5-2"
+           width="420.27945"
+           height="118.66142"
+           x="30.692846"
+           y="229.97247"
+           style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
+         style="font-size:30px;line-height:1.25;fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-opacity:1"
+         id="flowPara6493-7-4-0-1-7-2-84-1-5-0-0-3">flightdeck_cluster does this too!</flowPara></flowRoot>    <path
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#efefef;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 533.85156,599.0332 a 217.44737,59.245602 0 0 0 -217.44726,59.2461 217.44737,59.245602 0 0 0 217.44726,59.24609 217.44737,59.245602 0 0 0 217.34571,-58.69141 l 98.73632,-46.99023 -120.44921,20.68359 A 217.44737,59.245602 0 0 0 533.85156,599.0332 Z"
+       id="path1479"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
