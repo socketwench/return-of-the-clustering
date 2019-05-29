@@ -362,7 +362,7 @@
             <p class="fragment">No reliance on special APIs</p>
             <p class="fragment">Requires staff to manage cluster, set up storage</p>
           </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/installK8s1.png" data-background-size="contain">
+          <!-- <section data-transition="none" data-background-transition="none" data-background="images/installK8s1.png" data-background-size="contain">
             &nbsp;
           </section>
           <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s2.png" data-background-size="contain">
@@ -385,7 +385,7 @@
             <p>Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
             <p>Use kubeadm to stand up cluster</p>
             <p class="fragment"><a href="https://linode.com/docs/applications/containers/how-to-deploy-nginx-on-a-kubernetes-cluster/">Tutorial on Linode docs</a></p>
-          </section>
+          </section> -->
           <section>
             <h2>Storage still tricky</h2>
             <p class="fragment">Traditionally-managed NFS</p>
@@ -692,11 +692,11 @@ spec:
             <p class="fragment">...do <strong>not</strong> need block storage!</p>
             <p class="fragment">Object stores multi-writer by default</p>
           </section>
-          <section data-transition="none" data-background-transition="none" data-background="images/fastestDisk2.png" data-background-size="contain">
+          <!-- <section data-transition="none" data-background-transition="none" data-background="images/fastestDisk2.png" data-background-size="contain">
             <h2>Static files</h2>
             <p class="">...do <strong>not</strong> need block storage!</p>
             <p class="">Object stores multi-writer by default</p>
-          </section>
+          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture15.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -863,6 +863,11 @@ metadata:
   namespace: default
 type: Opaque</code></pre>
           </section>
+          <section>
+            <h2>Multi-tenancy</h2>
+            <p class="fragment">One site = one namespace</p>
+            <p class="fragment">Allows consistent deployment, service names</p>
+          </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture21.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -889,6 +894,11 @@ type: Opaque</code></pre>
             <p class="fragment"><code>kubectl apply -f path/to/my_object.yml</code></p>
             <p class="fragment">Repeat for each YAML file to deploy</p>
           </section>
+          <section>
+            <h2>using namespaces</h2>
+            <p class="fragment"><code>--namespace</code> parameter on <code>kubectl</code></p>
+            <p class="fragment"><a href="https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/">Namespace must exist first</a></p>
+          </section>
           <section data-transition="none">
             <img src="images/removeHumans1.png" />
           </section>
@@ -901,7 +911,7 @@ type: Opaque</code></pre>
           <section>
             <h2>Repeatable Clusters</h2>
             <p class="fragment">Clients only differ in sizes, logins, some features</p>
-            <p class="fragment">Use Ansible vars & templates to generate YAML</p>
+            <p class="fragment">Use Ansible vars + <a href="https://docs.ansible.com/ansible/latest/modules/k8s_module.html">k8s module</a> to deploy YAML</p>
           </section>
           <section data-transition="none">
             <img src="images/buildchain1.png" />
@@ -968,49 +978,122 @@ type: Opaque</code></pre>
             <p class="fragment">Gets the auth file from DO API</p>
           </section>
           <section>
-            <pre><code>    - name: Get the kubeconfig file.
-      import_role:
-        name: socketwench.digitalocean_kubeconfig
-      vars:
-        digitalocean_kubeconfig:
-          cluster: "my_k8s_cluser"
-          kubeconfig: "/path/to/my/kubeconfig.yaml"</code></pre>
+            <pre><code>---
+- hosts: all
+  vars:
+    digitalocean_kubeconfig:
+      cluster: "my_k8s_cluser"
+      kubeconfig: "/path/to/my/kubeconfig.yaml"
+  roles:
+    - socketwench.digitalocean_kubeconfig</code></pre>
           </section>
           <section>
             <h2>Writing the k8s yaml</h2>
-            <p class="fragment">Ansible <a href="https://docs.ansible.com/ansible/latest/modules/template_module.html"><code>Template</code></a> module</p>
-            <p class="fragment">Replaces placeholders in k8s files with values</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/ten7/flightdeck_cluster"><code>ten7.flightdeck_cluster</code></a> role</p>
+            <p class="fragment">Creates secrets, deployments, services</p>
           </section>
-          <section>
+          <!-- <section data-transition="none">
             <pre><code>---
-apiVersion: v1
-data:
-  tls.crt: "{{ ingress_tls_cert | b64encode }}"
-  tls.key: "{{ ingress_tls_key | b64encode }}"
-kind: Secret
-metadata:
-  name: ingress
-type: Opaque</code></pre>
+- hosts: all
+  vars:
+    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
+    flightdeck_cluster:
+      namespace: "example-com"   # Create, use this namespace
+      secrets:
+        - name: "ingress"
+          data:
+            - name: "tls.crt"
+              value: "{{ my_cert_chain }}"
+            - name: "tls.key"
+              value: "{{ my_private_key }}"
+      web:
+        replicas: 3
+      memcache:
+        replicas: 3
+      ingress:
+        tls:
+          - secret: "mycertchain"
+            hosts:
+              - "example.com"
+      rules:
+        - host: "example.com"
+          paths:
+            - path: "/"
+              backend: "web"
+              port: "6081"
+    roles:
+      - ten7.flightdeck_cluster</code></pre>
+            <small></small>
           </section>
-          <section>
-            <h2>Deploying containers</h2>
-            <p class="fragment">Ansible <a href="https://docs.ansible.com/ansible/latest/modules/k8s_module.html"><code>k8s</code></a> module</p>
-            <p class="fragment">Pass auth file as <code>kubeconfig</code> param</p>
-            <p class="fragment">Loop over all templated files, applying config</p>
+          <section data-transition="none">
+            <pre><code>---
+- hosts: all
+  vars:
+    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
+    flightdeck_cluster:
+      namespace: "example-com"
+      secrets:
+        - name: "ingress"  # Create the "ingress" secret
+          data:
+            - name: "tls.crt"
+              value: "{{ my_cert_chain }}"  # these are plaintext
+            - name: "tls.key"
+              value: "{{ my_private_key }}" # role will base64
+      web:
+        replicas: 3
+      memcache:
+        replicas: 3
+      ingress:
+        tls:
+          - secret: "mycertchain"
+            hosts:
+              - "example.com"
+      rules:
+        - host: "example.com"
+          paths:
+            - path: "/"
+              backend: "web"
+              port: "6081"
+    roles:
+      - ten7.flightdeck_cluster</code></pre>
+           <small></small>
           </section>
+          <section data-transition="none">
+            <pre><code>---
+- hosts: all
+  vars:
+    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
+    flightdeck_cluster:
+      namespace: "example-com"
+      secrets:
+        - name: "ingress"
+          data:
+            - name: "tls.crt"
+              value: "{{ my_cert_chain }}"
+            - name: "tls.key"
+              value: "{{ my_private_key }}"
+      web:
+        replicas: 3    # web engine deployment
+      memcache:
+        replicas: 3    # memcache StatefulSet
+      ingress:
+        tls:
+          - secret: "mycertchain"  # Use the cert
+            hosts:
+              - "example.com"
+      rules:
+        - host: "example.com"      # For this host...
+          paths:
+            - path: "/"            # ...for any path...
+              backend: "web"       # ...use the web service...
+              port: "6081"         # ...on the varnish port.
+    roles:
+      - ten7.flightdeck_cluster</code></pre>
+           <small>(Scroll down.)</small>
+          </section> -->
           <section>
-            <h2>Multi-tenancy</h2>
-            <p class="fragment">One site = one namespace</p>
-            <p class="fragment">Allows consistent deployment, service names</p>
-          </section>
-          <section>
-            <pre><code>    - name: Apply the definitions
-      k8s:
-        state: present
-        namespace: "example-com"                    # Avoid dots!
-        kubeconfig: "/path/to/my/kubeconfig.yaml"
-        src: "{{ item }}"
-      loop: "{{ k8s_yaml_files }}"</code></pre>
+            <h2>examples on github</h2>
+            <p class="fragment"><a href="https://github.com/ten7/ansible-role-flightdeck-cluster">github.com/ten7/ansible-role-flightdeck-cluster</a></p>
           </section>
         </section>
 
@@ -1130,10 +1213,15 @@ spec:
           <section data-background-transition="none" data-background="images/butHowDoWeUpdate1.png" data-background-size="contain">
             &nbsp;
           </section>
-          <section data-background-transition="none" data-background="images/butHowDoWeUpdate2.png" data-background-size="contain">
+          <section data-transition="none" data-background-transition="none" data-background="images/butHowDoWeUpdate2.png" data-background-size="contain">
             <h2>rolling update</h2>
             <p class="fragment">Replaces running containers with new image</p>
             <p class="fragment">Performed sequentially, reduces outages</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/butHowDoWeUpdate3.png" data-background-size="contain">
+            <h2>rolling update</h2>
+            <p class="">Replaces running containers with new image</p>
+            <p class="">Performed sequentially, reduces outages</p>
           </section>
           <section>
             <pre><code>---
@@ -1183,7 +1271,7 @@ spec:
         <section>
           <section>
             <h2>Special thanks</h2>
-            <p class="fragment">Drupaldelphia</p>
+            <p class="fragment">Flyover Camp</p>
             <p class="fragment"><a href="https://ten7.com/">TEN7</a></p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
@@ -1194,9 +1282,9 @@ spec:
           <section data-background-transition="fade" data-background="images/thereIsAnother2.png" data-background-size="contain">
             &nbsp;
           </section>
-          <section data-background-transition="none" data-background="images/thereIsAnother3.png" data-background-size="contain">
+          <section data-background-transition="none" data-background="images/thankYou.png" data-background-size="contain">
             <h2>Free stuff!</h2>
-            <p class="fragment">$100 credit on DigitalOcean</p>
+            <p class="fragment">$50 credit on DigitalOcean</p>
             <p class="fragment"><a href="https://ten7.com/digitalocean"><code>ten7.com/digitalocean</code></a></p>
           </section>
 
