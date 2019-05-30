@@ -944,7 +944,7 @@ type: Opaque</code></pre>
           </section>
           <section>
             <h2>Creating the cluster</h2>
-            <p class="fragment"><a href="https://galaxy.ansible.com/socketwench/digitalocean"><code>socketwench.digitalocean</code></a> role on Ansible Galaxy</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/ten7/digitalocean"><code>ten7.digitalocean</code></a> role on Ansible Galaxy</p>
             <p class="fragment">Handles scaling, node pools, adds ingress controller</p>
           </section>
           <section>
@@ -969,12 +969,12 @@ type: Opaque</code></pre>
               - key: "app"
                 value: "database"
   roles:
-    - socketwench.digitalocean</code></pre>
+    - ten7.digitalocean</code></pre>
             <small class="fragment">(Scroll down.)</small>
           </section>
           <section>
             <h2>Authorizing kubectl</h2>
-            <p class="fragment"><a href="https://galaxy.ansible.com/socketwench/digitalocean_kubeconfig"><code>socketwench.digitalocean_kubeconfig</code></a> role</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/ten7/digitalocean_kubeconfig"><code>ten7.digitalocean_kubeconfig</code></a> role</p>
             <p class="fragment">Gets the auth file from DO API</p>
           </section>
           <section>
@@ -985,7 +985,7 @@ type: Opaque</code></pre>
       cluster: "my_k8s_cluser"
       kubeconfig: "/path/to/my/kubeconfig.yaml"
   roles:
-    - socketwench.digitalocean_kubeconfig</code></pre>
+    - ten7.digitalocean_kubeconfig</code></pre>
           </section>
           <section>
             <h2>Writing the k8s yaml</h2>
