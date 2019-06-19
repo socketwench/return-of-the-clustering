@@ -778,9 +778,10 @@ kind: Ingress
 metadata:
   name: "my-cluster-ingress"
   annotations:
-    ingress.kubernetes.io/app-root: /           # keep logged-in
-    ingress.kubernetes.io/affinity: cookie      # users on the
-    ingress.kubernetes.io/enable-cors: "true"   # same replica.
+    ingress.kubernetes.io/app-root: /             # Fix rewrites.
+    ingress.kubernetes.io/affinity: cookie
+    ingress.kubernetes.io/enable-cors: "true"     # Enable CORS.
+    ingress.kubernetes.io/proxy-body-size: "128m" # File uploads.
 spec:
   tls:
     - hosts:
@@ -806,6 +807,7 @@ metadata:
     ingress.kubernetes.io/app-root: /
     ingress.kubernetes.io/affinity: cookie
     ingress.kubernetes.io/enable-cors: "true"
+    ingress.kubernetes.io/proxy-body-size: "128m"
 spec:
   tls:
     - hosts:
@@ -831,6 +833,7 @@ metadata:
     ingress.kubernetes.io/app-root: /
     ingress.kubernetes.io/affinity: cookie
     ingress.kubernetes.io/enable-cors: "true"
+    ingress.kubernetes.io/proxy-body-size: "128m"
 spec:
   tls:
     - hosts:
@@ -1271,7 +1274,7 @@ spec:
         <section>
           <section>
             <h2>Special thanks</h2>
-            <p class="fragment">Flyover Camp</p>
+            <p class="fragment">Drupal Govcon</p>
             <p class="fragment"><a href="https://ten7.com/">TEN7</a></p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
@@ -1284,7 +1287,7 @@ spec:
           </section>
           <section data-background-transition="none" data-background="images/thankYou.png" data-background-size="contain">
             <h2>Free stuff!</h2>
-            <p class="fragment">$50 credit on DigitalOcean</p>
+            <p class="fragment">$100 credit on DigitalOcean</p>
             <p class="fragment"><a href="https://ten7.com/digitalocean"><code>ten7.com/digitalocean</code></a></p>
           </section>
 
