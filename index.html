@@ -362,30 +362,6 @@
             <p class="fragment">No reliance on special APIs</p>
             <p class="fragment">Requires staff to manage cluster, set up storage</p>
           </section>
-          <!-- <section data-transition="none" data-background-transition="none" data-background="images/installK8s1.png" data-background-size="contain">
-            &nbsp;
-          </section>
-          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s2.png" data-background-size="contain">
-            <p>Install Docker, kubelet</p>
-            <p class="fragment">Install kubeadm, kubectl on manager</p>
-            <p class="fragment">Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-          </section>
-          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s3.png" data-background-size="contain">
-            <p>Install Docker, kubelet</p>
-            <p>Install kubeadm, kubectl on manager</p>
-            <p>Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-          </section>
-          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/installK8s4.png" data-background-size="contain">
-            <p>Install Docker, kubelet</p>
-            <p>Install kubeadm, kubectl on manager</p>
-            <p>Install <a href="https://www.projectcalico.org/">Calico CNI</a></p>
-            <p>Use kubeadm to stand up cluster</p>
-            <p class="fragment"><a href="https://linode.com/docs/applications/containers/how-to-deploy-nginx-on-a-kubernetes-cluster/">Tutorial on Linode docs</a></p>
-          </section> -->
           <section>
             <h2>Storage still tricky</h2>
             <p class="fragment">Traditionally-managed NFS</p>
@@ -461,8 +437,8 @@
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1  # k8s' API version for this doc.
-kind: Deployment                # The object type.
+apiVersion: apps/v1    # k8s' API version for this doc.
+kind: Deployment       # The object type.
 metadata:
   name: web
 spec:
@@ -487,10 +463,10 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web    # The name of the deployment.
+  name: web        # The name of the deployment.
 spec:
   replicas: 3
   template:
@@ -513,7 +489,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
@@ -539,7 +515,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
@@ -565,7 +541,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
@@ -626,14 +602,13 @@ kind: Secret
 metadata:
   name: mysql
 data:
-  MYSQL_ROOT_PASSWORD: "YXZlcnliYWRwYXNzd29yZAo="   # These
-  MYSQL_DATABASE: "ZHJ1cGFsX2Ri"                    # must be
-  MYSQL_USER: "ZHJ1cGFs"                            # base64
-  MYSQL_PASSWORD: "cGFzc3dvcmQ="                    # encoded.</code></pre>
+  drupal-db-name.txt: "ZHJ1cGFsX2Ri"         # Must be
+  drupal-db-user.txt: "ZHJ1cGFs"             # base64
+  drupal-db-pass.txt: "cGFzc3dvcmQ="         # encoded.</code></pre>
           </section>
           <section>
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
@@ -644,6 +619,10 @@ spec:
       labels:
         app: web
     spec:
+      volumes:
+        - name: vol-secrets-db           # Create a "disk"
+          secret:                        # for our mysql secret.
+            secretName: mysql
       containers:
         - image: ten7/flight-deck-web
           imagePullPolicy: Always
@@ -657,11 +636,7 @@ spec:
           imagePullPolicy: Always
           name: varnish
           ports:
-            - containerPort: 6081
-      volumes:
-        - name: vol-secrets-db           # Create a "disk"
-          secret:                        # for our mysql secret.
-            secretName: mysql</code></pre>
+            - containerPort: 6081</code></pre>
             <small>(Scroll down.)</small>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/architecture9.png" data-background-size="contain">
@@ -692,11 +667,6 @@ spec:
             <p class="fragment">...do <strong>not</strong> need block storage!</p>
             <p class="fragment">Object stores multi-writer by default</p>
           </section>
-          <!-- <section data-transition="none" data-background-transition="none" data-background="images/fastestDisk2.png" data-background-size="contain">
-            <h2>Static files</h2>
-            <p class="">...do <strong>not</strong> need block storage!</p>
-            <p class="">Object stores multi-writer by default</p>
-          </section> -->
           <section data-transition="none" data-background-transition="none" data-background="images/architecture15.png" data-background-size="contain">
             &nbsp;
           </section>
@@ -773,7 +743,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Ingress
 metadata:
   name: "my-cluster-ingress"
@@ -799,7 +769,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Ingress
 metadata:
   name: "my-cluster-ingress"
@@ -825,7 +795,7 @@ spec:
           </section>
           <section data-transition="none">
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Ingress
 metadata:
   name: "my-cluster-ingress"
@@ -995,105 +965,6 @@ type: Opaque</code></pre>
             <p class="fragment"><a href="https://galaxy.ansible.com/ten7/flightdeck_cluster"><code>ten7.flightdeck_cluster</code></a> role</p>
             <p class="fragment">Creates secrets, deployments, services</p>
           </section>
-          <!-- <section data-transition="none">
-            <pre><code>---
-- hosts: all
-  vars:
-    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
-    flightdeck_cluster:
-      namespace: "example-com"   # Create, use this namespace
-      secrets:
-        - name: "ingress"
-          data:
-            - name: "tls.crt"
-              value: "{{ my_cert_chain }}"
-            - name: "tls.key"
-              value: "{{ my_private_key }}"
-      web:
-        replicas: 3
-      memcache:
-        replicas: 3
-      ingress:
-        tls:
-          - secret: "mycertchain"
-            hosts:
-              - "example.com"
-      rules:
-        - host: "example.com"
-          paths:
-            - path: "/"
-              backend: "web"
-              port: "6081"
-    roles:
-      - ten7.flightdeck_cluster</code></pre>
-            <small></small>
-          </section>
-          <section data-transition="none">
-            <pre><code>---
-- hosts: all
-  vars:
-    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
-    flightdeck_cluster:
-      namespace: "example-com"
-      secrets:
-        - name: "ingress"  # Create the "ingress" secret
-          data:
-            - name: "tls.crt"
-              value: "{{ my_cert_chain }}"  # these are plaintext
-            - name: "tls.key"
-              value: "{{ my_private_key }}" # role will base64
-      web:
-        replicas: 3
-      memcache:
-        replicas: 3
-      ingress:
-        tls:
-          - secret: "mycertchain"
-            hosts:
-              - "example.com"
-      rules:
-        - host: "example.com"
-          paths:
-            - path: "/"
-              backend: "web"
-              port: "6081"
-    roles:
-      - ten7.flightdeck_cluster</code></pre>
-           <small></small>
-          </section>
-          <section data-transition="none">
-            <pre><code>---
-- hosts: all
-  vars:
-    flightdeck_cluster_kubeconfig: "/path/to/my/kubectl.yaml"
-    flightdeck_cluster:
-      namespace: "example-com"
-      secrets:
-        - name: "ingress"
-          data:
-            - name: "tls.crt"
-              value: "{{ my_cert_chain }}"
-            - name: "tls.key"
-              value: "{{ my_private_key }}"
-      web:
-        replicas: 3    # web engine deployment
-      memcache:
-        replicas: 3    # memcache StatefulSet
-      ingress:
-        tls:
-          - secret: "mycertchain"  # Use the cert
-            hosts:
-              - "example.com"
-      rules:
-        - host: "example.com"      # For this host...
-          paths:
-            - path: "/"            # ...for any path...
-              backend: "web"       # ...use the web service...
-              port: "6081"         # ...on the varnish port.
-    roles:
-      - ten7.flightdeck_cluster</code></pre>
-           <small>(Scroll down.)</small>
-          </section> -->
           <section>
             <h2>examples on github</h2>
             <p class="fragment"><a href="https://github.com/ten7/ansible-role-flightdeck-cluster">github.com/ten7/ansible-role-flightdeck-cluster</a></p>
@@ -1186,10 +1057,12 @@ type: Opaque</code></pre>
           </section>
           <section>
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
+  labels:
+    app: web
 spec:
   replicas: 3
   template:
@@ -1228,10 +1101,12 @@ spec:
           </section>
           <section>
             <pre><code>---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
+  labels:
+    app: web
 spec:
   replicas: 3
   strategy:
@@ -1267,14 +1142,14 @@ spec:
             <h2>Further reading</h2>
             <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
             <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Interactive tutorial on kubernetes.io</a></p>
-            <p class="fragment"><a href="https://developers.digitalocean.com/documentation/v2/">DigitalOcean API Docs</a></p>
+            <p class="fragment"><a href="https://ten7.github.io/hosting-drupal-on-kubernetes/">TEN7's Hosting Drupal on Kubernetes</a></p>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Special thanks</h2>
-            <p class="fragment">Drupal Govcon</p>
+            <p class="fragment">Drupalcorn</p>
             <p class="fragment"><a href="https://ten7.com/">TEN7</a></p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
@@ -1287,7 +1162,7 @@ spec:
           </section>
           <section data-background-transition="none" data-background="images/thankYou.png" data-background-size="contain">
             <h2>Free stuff!</h2>
-            <p class="fragment">$100 credit on DigitalOcean</p>
+            <p class="fragment">Free credit on DigitalOcean</p>
             <p class="fragment"><a href="https://ten7.com/digitalocean"><code>ten7.com/digitalocean</code></a></p>
           </section>
 
