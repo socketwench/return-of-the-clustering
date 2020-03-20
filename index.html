@@ -51,7 +51,7 @@
           <section data-background="images/t7-background.jpg" class="teamten7">
             <h2 class="ten7">Services</h2>
             <p class="fragment">Site and hosting migratiton</p>
-            <p class="fragment">Drupal 8 upgrades</p>
+            <p class="fragment">Drupal 9 upgrades</p>
             <p class="fragment">Site audits</p>
             <p class="fragment">Process consultantcy</p>
           </section>
@@ -388,7 +388,7 @@
           <section>
             <h2>Providers</h2>
             <p class="fragment">Amazon, Azure, DigitalOcean, Google GKE, others</p>
-            <p class="fragment"><a href="https://kubernetes.io/docs/setup/pick-right-solution/">kubernetes.io/docs/setup/pick-right-solution</a></p>
+            <p class="fragment">Experiment! Each have pros &amp; cons</p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/bestChance1.png" data-background-size="contain">
             <h2>Digitalocean</h2>
@@ -836,6 +836,20 @@ metadata:
   namespace: default
 type: Opaque</code></pre>
           </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/letsEncrypt1.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/letsEncrypt2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/letsEncrypt3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/letsEncrypt4.png" data-background-size="contain">
+            <h2>Cert Manager</h2>
+            <p class="fragment">Open source cert store, provisioner</p>
+            <p class="fragment"><a href="https://cert-manager.io">cert-manager.io</a></p>
+          </section>
           <section>
             <h2>Multi-tenancy</h2>
             <p class="fragment">One site = one namespace</p>
@@ -918,7 +932,7 @@ type: Opaque</code></pre>
           <section>
             <h2>Creating the cluster</h2>
             <p class="fragment"><a href="https://galaxy.ansible.com/ten7/digitalocean"><code>ten7.digitalocean</code></a> role on Ansible Galaxy</p>
-            <p class="fragment">Handles scaling, node pools, adds ingress controller</p>
+            <p class="fragment">Handles scaling, node pools, and more</p>
           </section>
           <section>
             <pre><code>---
@@ -1044,11 +1058,12 @@ type: Opaque</code></pre>
           <section data-transition="none">
             <img src="images/k8sBuild9.png" />
           </section>
-          <!-- <section>
-            <h2>images as artifacts</h2>
-            <p class="fragment">Older versions retained in registry</p>
-            <p class="fragment">Easier roll-back, troubleshooting</p>
-          </section> -->
+          <section>
+            <h2>example dockerfile</h2>
+            <p class="fragment"><a href="https://github.com/ten7/flight-deck-drupal">github.com/ten7/flight-deck-drupal</a></p>
+            <p class="fragment">Creates directories, builds Drupal</p>
+            <p class="fragment">Entrypoint writes settings.php</p>
+          </section>
           <section>
             <h2>private registry</h2>
             <p class="fragment">Stores built, site-specific images</p>
@@ -1142,19 +1157,19 @@ spec:
             <h2>Further reading</h2>
             <p class="fragment"><a href="http://kubernetesbyexample.com/">kubernetesbyexample.com</a></p>
             <p class="fragment"><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Interactive tutorial on kubernetes.io</a></p>
-            <p class="fragment"><a href="https://ten7.github.io/hosting-drupal-on-kubernetes/">TEN7's Hosting Drupal on Kubernetes</a></p>
+            <p class="fragment"><a href="https://www.youtube.com/playlist?list=PL36d5sLUxT4QhU0xxIWg1ERlm5N8BkAMV">TEN7's Hosting Drupal on Kubernetes</a></p>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Special thanks</h2>
-            <p class="fragment">Drupalcorn</p>
+            <p class="fragment">This event!</p>
             <p class="fragment"><a href="https://ten7.com/">TEN7</a></p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
 
-          <section data-background-transition="fade" data-background="images/thereIsAnother1.png" data-background-size="contain">
+          <!-- <section data-background-transition="fade" data-background="images/thereIsAnother1.png" data-background-size="contain">
             &nbsp;
           </section>
           <section data-background-transition="fade" data-background="images/thereIsAnother2.png" data-background-size="contain">
@@ -1164,7 +1179,7 @@ spec:
             <h2>Free stuff!</h2>
             <p class="fragment">Free credit on DigitalOcean</p>
             <p class="fragment"><a href="https://ten7.com/digitalocean"><code>ten7.com/digitalocean</code></a></p>
-          </section>
+          </section> -->
 
           <section data-background-transition="none" data-background="images/thankYou.png" data-background-size="contain">
             <h1>Thank you!</h1>
